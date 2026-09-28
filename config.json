@@ -1,0 +1,31 @@
+{
+  "_comment_subscriptions": "Inventory is gathered from ALL of these subscriptions (VMs like rrsgncusg-* live in a different sub than the rrwvd/rrwewvd fleet). Names or IDs both work.",
+  "subscriptions": ["ReefReview_MCA_WVDs", "ReefReview_MCA_Dev"],
+
+  "_comment_threshold": "Uptime ABOVE this many minutes gets the '(Extended)' suffix + yellow highlight. Set to the 9h scheduled session + a 10-minute grace = 550. Override per resource-group or per region below; the most specific match wins (vm name > resourceGroup > region > default).",
+  "extendedThresholdMinutes": 550,
+  "thresholdOverrides": {
+    "byResourceGroup": {},
+    "byRegion": {},
+    "byVm": {}
+  },
+
+  "_comment_workbook": "Path to the workbook to update and the sheet to write into. Leave sheet null to auto-pick the sheet matching the target month (e.g. 'Jun 26').",
+  "workbook": "C:/Users/DELL/Downloads/usage-tracker (1)/Daily_and_Monthly_Usage_of_September26.xlsx",
+  "sheet": null,
+
+  "_comment_metric": "Azure Monitor metric used as the 'is it running' heartbeat. A VM only emits platform metrics while powered on, so the count of non-null PT1M buckets equals minutes powered on.",
+  "metric": "Percentage CPU",
+
+  "_comment_skip": "VM-name prefixes in the sheet that are NOT Azure VMs (e.g. placeholder rows). Rows whose VM name starts with one of these are left untouched and reported. Empty = track everything.",
+  "skipPrefixes": [],
+
+  "_comment_deleted": "For a sheet row whose VM is no longer in the live inventory (deprovisioned), uptime is reconstructed from the Azure Activity Log (~90-day retention) by pairing start/deallocate events. Each subscription in 'subscriptions' is tried against these resource groups.",
+  "deletedVmLookup": {
+    "resourceGroups": ["RRWVDS-RG1", "RRWEWVDS-RG1", "RRSGNCUSG-RG1"],
+    "activityLogRetentionDays": 90
+  },
+
+  "concurrency": 8,
+  "highlightColorARGB": "FFFFFF00"
+}

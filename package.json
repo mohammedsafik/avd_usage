@@ -1,0 +1,12 @@
+{
+  "name": "avd-usage-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Reads AVD VM daily uptime from Azure Monitor and updates the Daily/Monthly Usage workbook.",
+  "bin": { "avd-usage": "update-avd-usage.js" },
+  "scripts": {
+    "dry-run": "node update-avd-usage.js",
+    "update": "node update-avd-usage.js --write"
+  },
+  "dependencies": { "exceljs": "^4.4.0" }
+}
